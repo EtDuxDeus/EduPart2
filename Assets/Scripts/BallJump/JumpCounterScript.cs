@@ -5,27 +5,25 @@ using TMPro;
 
 public class JumpCounterScript : MonoBehaviour
 {
-    public int jumps;
+
     public GameObject ground;
-    public float distanceToTheGround;
-    public TextMeshProUGUI Canvas;
-    // Start is called before the first frame update
+    public int CountOfBallJumps;
+    private float distanceToTheGround;
+    public TextMeshProUGUI HUDJumpsAndDistanceToTheFloor;
     void Start()
     {
-        jumps = 0;
-    }
-   
-    private void OnCollisionEnter(Collision collision)
-    {
-        jumps++;
+        CountOfBallJumps = 0;
     }
 
-    // Update is called once per frame
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        CountOfBallJumps++;
+    }
+
+
     void Update()
     {
-        
-        Canvas.text = "Distance to the ground: \n" + Mathf.Abs(transform.position.y - ground.transform.position.y) + "\n jumps: " + jumps;
-        
-       
+        HUDJumpsAndDistanceToTheFloor.text = "Distance to the ground: \n" + Mathf.Abs(transform.position.y - ground.transform.position.y) + "\n jumps: " + CountOfBallJumps;
     }
 }

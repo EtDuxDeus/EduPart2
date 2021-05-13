@@ -4,69 +4,71 @@ using UnityEngine;
 
 public class EventExample : MonoBehaviour
 {
-    public delegate void exampleDel();
-    private static event exampleDel Eventer;
+    public delegate void ExampleDelEventHandler();
+    private static event ExampleDelEventHandler ExampleOfEvent;
 
-    public static event exampleDel MyEventer
+    public static event ExampleDelEventHandler MyExampleOfEvent
     {
         add
         {
-            Eventer += value;
+            ExampleOfEvent += value;
             Debug.Log("Some Logic On Ading");
         }
         remove
         {
-            Eventer -= value;
-            Debug.Log("Some Logicn On Removing");
+            ExampleOfEvent -= value;
+            Debug.Log("Some Logic On Removing");
         }
     }
-    
-    
-    void Start()
+
+    private void OnEnable()
     {
-        MyEventer += MathForExample.CalculateTheMath;
-        MyEventer += MathForExample.WriteToLogTheAnswer;
-        Eventer();
-        MyEventer -= MathForExample.CalculateTheMath;
-        MyEventer -= MathForExample.WriteToLogTheAnswer;
+        MyExampleOfEvent += MathForExample.CalculateTheMath;
+        MyExampleOfEvent += MathForExample.WriteToLogTheAnswer;
+    }
+
+    private void OnDisable()
+    {
+        MyExampleOfEvent -= MathForExample.CalculateTheMath;
+        MyExampleOfEvent -= MathForExample.WriteToLogTheAnswer;
     }
 
     public static void ClearAllDelegatesFromEventHandler()
     {
-        foreach(System.Delegate d in Eventer.GetInvocationList())
+        foreach (System.Delegate d in ExampleOfEvent.GetInvocationList())
         {
-            Eventer -= (exampleDel)d;
+            ExampleOfEvent -= (ExampleDelEventHandler)d;
         }
     }
 
     private void SubToCalculateTheMath()
     {
-        Eventer += MathForExample.CalculateTheMath;
+        ExampleOfEvent += MathForExample.CalculateTheMath;
     }
 
     private void RemCalculateTheMath()
     {
-        Eventer -= MathForExample.CalculateTheMath;
+        ExampleOfEvent -= MathForExample.CalculateTheMath;
     }
 
     private void SubToWriteToLogTheAnwer()
     {
-        Eventer += MathForExample.WriteToLogTheAnswer;
+        ExampleOfEvent += MathForExample.WriteToLogTheAnswer;
     }
 
     private void RemToWriteToLogTheAnwer()
     {
-        Eventer -= MathForExample.WriteToLogTheAnswer;
+        ExampleOfEvent -= MathForExample.WriteToLogTheAnswer;
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if(Eventer != null)
+            if (ExampleOfEvent != null)
             {
-                Eventer.Invoke();
+                ExampleOfEvent.Invoke();
             }
             else
             {

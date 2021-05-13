@@ -9,7 +9,6 @@ public class SavePrefs : MonoBehaviour
 
     void Start()
     {
-        
         numberForSave = 0;
     }
 
@@ -18,11 +17,11 @@ public class SavePrefs : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I))
         {
             numberForSave++;
-            Debug.Log("Number for save: "+ numberForSave);
+            Debug.Log("Number for save: " + numberForSave);
         }
         if (Input.GetKeyDown(KeyCode.F5))
         {
-            PlayerPrefs.SetInt("Numerator",numberForSave);
+            PlayerPrefs.SetInt("Numerator", numberForSave);
 
             PlayerPrefs.Save();
             Debug.Log("Number is saved (" + numberForSave + ")");

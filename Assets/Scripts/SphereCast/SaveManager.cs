@@ -17,10 +17,9 @@ public class SaveManager : MonoBehaviour
         {
             ControllerScript.hitNumber = Convert.ToInt32(File.ReadAllText(path));
         }
-        
+
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.F1))
@@ -38,7 +37,7 @@ public class SaveManager : MonoBehaviour
         else
         {
             File.Create(path);
-            
+
             File.WriteAllText(path, Convert.ToString(ControllerScript.hitNumber));
         }
     }

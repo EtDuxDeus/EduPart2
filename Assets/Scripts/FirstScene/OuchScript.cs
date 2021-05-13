@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class OuchScript : MonoBehaviour
 {
-    int i = 0;
-    // Start is called before the first frame update
+    int i;
     void Start()
     {
-        
+        i = 0;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -17,14 +16,7 @@ public class OuchScript : MonoBehaviour
         Debug.Log("Ouch");
         if (i % 10 == 0)
         {
-            
             Debug.Log("Screw you");
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

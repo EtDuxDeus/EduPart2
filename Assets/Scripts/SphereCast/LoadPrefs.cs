@@ -6,11 +6,6 @@ public class LoadPrefs : MonoBehaviour
 {
     public int importantNumber;
 
-    void Start()
-    {
-        
-    }
-
 
     void Update()
     {

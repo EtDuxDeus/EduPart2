@@ -12,21 +12,20 @@ public class ControllerScript : MonoBehaviour
 
     Rigidbody rigBod;
     RaycastHit hit;
-    
+
     void Start()
     {
-        
         rigBod = GetComponent<Rigidbody>();
     }
-    public float amount = 50f;
+    public float TurnPower = 50f;
     void Update()
     {
         if (Input.GetButtonDown("Jump"))
         {
             Shoot();
         }
-        float h = Input.GetAxis("Horizontal") * amount * Time.deltaTime;
-        float v = Input.GetAxis("Vertical") * amount * Time.deltaTime;
+        float h = Input.GetAxis("Horizontal") * TurnPower * Time.deltaTime;
+        float v = Input.GetAxis("Vertical") * TurnPower * Time.deltaTime;
 
         rigBod.AddTorque(transform.up * h);
         rigBod.AddTorque(transform.right * v);
@@ -35,11 +34,11 @@ public class ControllerScript : MonoBehaviour
 
     public void Shoot()
     {
-        if (Physics.SphereCast(transform.position, 1f, transform.forward ,out hit, distance))
+        if (Physics.SphereCast(transform.position, 1f, transform.forward, out hit, distance))
         {
             hit.collider.GetComponent<GameObject>();
-            
-            hit.rigidbody.AddForce(-hit.normal*pushForce);
+
+            hit.rigidbody.AddForce(-hit.normal * pushForce);
 
             hitNumber++;
         }
@@ -49,5 +48,5 @@ public class ControllerScript : MonoBehaviour
         }
     }
 
-    
+
 }

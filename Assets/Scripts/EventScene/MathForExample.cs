@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class MathForExample : MonoBehaviour
 {
-    public static double i;
+    public static double SumForExample;
     void Start()
     {
-        
-        i = 1;
+        SumForExample = 1;
     }
 
     void Update()
@@ -21,11 +20,11 @@ public class MathForExample : MonoBehaviour
 
     public static void CalculateTheMath()
     {
-        i = i + 1;
+        SumForExample = SumForExample + 1;
     }
 
     public static void WriteToLogTheAnswer()
     {
-        Debug.Log(i);
+        Debug.Log(SumForExample);
     }
 }

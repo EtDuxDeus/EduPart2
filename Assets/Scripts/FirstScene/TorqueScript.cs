@@ -4,29 +4,23 @@ using UnityEngine;
 
 public class TorqueScript : MonoBehaviour
 {
-    Rigidbody rigBod;
-    // Start is called before the first frame update
+    private Rigidbody RigBod;
     void Start()
     {
-       rigBod =  GetComponent<Rigidbody>();
+        RigBod = GetComponent<Rigidbody>();
     }
-    public float amount = 50f;
-    void FixedUpdate()
-    {
+    public float TurnPower = 50f;
 
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        float h = Input.GetAxis("Horizontal") * amount * Time.deltaTime;
-        float v = Input.GetAxis("Vertical") * amount * Time.deltaTime;
+        float h = Input.GetAxis("Horizontal") * TurnPower * Time.deltaTime;
+        float v = Input.GetAxis("Vertical") * TurnPower * Time.deltaTime;
 
-        rigBod.AddTorque(transform.up * h);
-        rigBod.AddTorque(transform.right * v);
+        RigBod.AddTorque(transform.up * h);
+        RigBod.AddTorque(transform.right * v);
     }
 
-  
+
 
 
 
