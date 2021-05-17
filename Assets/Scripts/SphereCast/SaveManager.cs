@@ -4,42 +4,58 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-public class SaveManager : MonoBehaviour
+namespace Tools
 {
-    private string path;
-    private void Awake()
+    public class SaveManager : MonoBehaviour
     {
-        path = Application.persistentDataPath + "\\save.txt";
-    }
-    void Start()
-    {
-        if (File.Exists(path))
+        private string path;
+        private void Awake()
         {
-            ControllerScript.hitNumber = Convert.ToInt32(File.ReadAllText(path));
+            path = Application.persistentDataPath + "\\save.txt";
+        }
+        void Start()
+        {
+            LoadFromFile();
+        }
+
+        void Update()
+        {
+            SaveToFile();
+        }
+
+        private void LoadFromFile()
+        {
+            if (File.Exists(path))
+            {
+                ControllerScript.hitNumber = Convert.ToInt32(File.ReadAllText(path));
+            }
+            else
+            {
+                File.Create(path);
+            }
+        }
+
+        private void SaveToFile()
+        {
+            if (Input.GetKeyDown(KeyCode.F1))
+            {
+                HitSave();
+            }
+        }
+
+        public void HitSave()
+        {
+            if (File.Exists(path))
+            {
+                File.WriteAllText(path, Convert.ToString(ControllerScript.hitNumber));
+            }
+            else
+            {
+                File.Create(path);
+
+                File.WriteAllText(path, Convert.ToString(ControllerScript.hitNumber));
+            }
         }
 
     }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F1))
-        {
-            HitSave();
-        }
-    }
-
-    public void HitSave()
-    {
-        if (File.Exists(path))
-        {
-            File.WriteAllText(path, Convert.ToString(ControllerScript.hitNumber));
-        }
-        else
-        {
-            File.Create(path);
-
-            File.WriteAllText(path, Convert.ToString(ControllerScript.hitNumber));
-        }
-    }
-
 }

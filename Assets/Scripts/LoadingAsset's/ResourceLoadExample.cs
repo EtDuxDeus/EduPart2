@@ -2,15 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResourceLoadExample : MonoBehaviour
+namespace Tools
 {
-    void Update()
+    public class ResourceLoadExample : MonoBehaviour
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        void Update()
         {
-            Vector3 spawnPoint = transform.position + new Vector3(0f, 2f, 0f);
+            SpawnSphereFromResources();
+        }
 
-            Instantiate(Resources.Load<GameObject>("Sphere"), spawnPoint, transform.rotation);
+        private void SpawnSphereFromResources()
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Vector3 spawnPoint = transform.position + new Vector3(0f, 2f, 0f);
+
+                Instantiate(Resources.Load<GameObject>("Sphere"), spawnPoint, transform.rotation);
+            }
         }
     }
 }

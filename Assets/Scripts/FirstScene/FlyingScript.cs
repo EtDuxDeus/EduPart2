@@ -2,13 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlyingScript : MonoBehaviour
+namespace Tools
 {
-
-    private float hoverForce = 12f;
-    private void OnTriggerStay(Collider other)
+    public class FlyingScript : MonoBehaviour
     {
-        other.attachedRigidbody.AddForce(Vector3.up * hoverForce, ForceMode.Acceleration);
-    }
 
+        private float hoverForce = 12f;
+        private void OnTriggerStay(Collider other)
+        {
+            MakeObjectFly(other);
+        }
+
+        private void MakeObjectFly(Collider other)
+        {
+            other.attachedRigidbody.AddForce(Vector3.up * hoverForce, ForceMode.Acceleration);
+        }
+    }
 }

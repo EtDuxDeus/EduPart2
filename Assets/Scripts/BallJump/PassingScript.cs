@@ -2,18 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PassingScript : MonoBehaviour
+namespace Tools
 {
-    [SerializeField] private int passingsThrough;
-
-    void Start()
+    public class PassingScript : MonoBehaviour
     {
-        passingsThrough = 0;
-    }
+        [SerializeField] private int passingsThrough;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        passingsThrough++;
-    }
+        void Start()
+        {
+            passingsThrough = 0;
+        }
 
+        private void OnTriggerEnter(Collider other)
+        {
+            passingsThrough++;
+        }
+
+    }
 }

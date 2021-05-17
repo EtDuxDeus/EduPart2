@@ -2,28 +2,49 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SavePrefs : MonoBehaviour
+namespace Tools
 {
-    public static int numberForSave;
-
-
-    void Start()
+    public class SavePrefs : MonoBehaviour
     {
-        numberForSave = 0;
-    }
+        public static int numberForSave;
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.I))
+
+        void Start()
         {
-            numberForSave++;
+            numberForSave = 0;
+        }
+
+        void Update()
+        {
+            IncreaseNumber();
+            SaveToPlayerPrefs();
+        }
+
+        private void IncreaseNumber()
+        {
+            if (Input.GetKeyDown(KeyCode.I))
+            {
+                numberForSave++;
+                ShowNumberToLog();
+            }
+        }
+        private void ShowNumberToLog()
+        {
             Debug.Log("Number for save: " + numberForSave);
         }
-        if (Input.GetKeyDown(KeyCode.F5))
-        {
-            PlayerPrefs.SetInt("Numerator", numberForSave);
 
-            PlayerPrefs.Save();
+        private void SaveToPlayerPrefs()
+        {
+            if (Input.GetKeyDown(KeyCode.F5))
+            {
+                PlayerPrefs.SetInt("Numerator", numberForSave);
+
+                PlayerPrefs.Save();
+                ShowSavingInfo();
+            }
+        }
+        private void ShowSavingInfo()
+        {
             Debug.Log("Number is saved (" + numberForSave + ")");
         }
     }

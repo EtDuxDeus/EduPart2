@@ -4,58 +4,84 @@ using System;
 using System.IO;
 using UnityEngine;
 
-public class Serialization : MonoBehaviour
+namespace Tools
 {
-    private MyClassForJSon myExample = new MyClassForJSon();
-    private string path = Application.streamingAssetsPath + "\\myExample";
-
-    void Start()
+    public class Serialization : MonoBehaviour
     {
-        myExample.myRank = 0;
-        myExample.myMoney = 0;
-        myExample.myName = "NoOne";
-    }
+        private MyClassForJSon myEntity;
+        private string path;
 
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
+        void Start()
         {
-            myExample.myRank = 6;
-            myExample.myMoney = 666;
-            myExample.myName = "Me";
+            myEntity = new MyClassForJSon();
+            path = Application.streamingAssetsPath + "\\myEntity";
+            myEntity.myRank = 0;
+            myEntity.myMoney = 0;
+            myEntity.myName = "NoOne";
         }
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            Debug.Log(myExample);
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            string json = JsonUtility.ToJson(myExample);
 
-            if (File.Exists(path))
-            {
-                File.WriteAllText(path, json);
-                Debug.Log("Saved");
-            }
-            else
-            {
-                File.Create(path);
-                Debug.Log("JsonFile Created");
-            }
+
+        void Update()
+        {
+            FillTheFieldsOfClass();
+            ShowEntityInfo();
+            SaveEntityToJson();
+            LoadEntityFromJson();
 
         }
-        if (Input.GetKeyDown(KeyCode.L))
+
+        private void FillTheFieldsOfClass()
         {
-            if (File.Exists(path))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                string json = File.ReadAllText(path);
-                JsonUtility.FromJsonOverwrite(json, myExample);
-                Debug.Log("Object is loaded");
+                myEntity.myRank = 6;
+                myEntity.myMoney = 666;
+                myEntity.myName = "Me";
             }
-            else
+        }
+
+        private void ShowEntityInfo()
+        {
+            if (Input.GetKeyDown(KeyCode.T))
             {
-                Debug.Log("No File");
+                Debug.Log(myEntity);
+            }
+        }
+
+        private void SaveEntityToJson()
+        {
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                string json = JsonUtility.ToJson(myEntity);
+
+                if (File.Exists(path))
+                {
+                    File.WriteAllText(path, json);
+                    Debug.Log("Saved");
+                }
+                else
+                {
+                    File.Create(path);
+                    Debug.Log("JsonFile Created");
+                }
+
+            }
+        }
+
+        private void LoadEntityFromJson()
+        {
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                if (File.Exists(path))
+                {
+                    string json = File.ReadAllText(path);
+                    JsonUtility.FromJsonOverwrite(json, myEntity);
+                    Debug.Log("Object is loaded");
+                }
+                else
+                {
+                    Debug.Log("No File");
+                }
             }
         }
     }

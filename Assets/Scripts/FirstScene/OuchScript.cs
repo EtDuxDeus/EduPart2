@@ -2,21 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OuchScript : MonoBehaviour
+namespace Tools
 {
-    int i;
-    void Start()
+    public class OuchScript : MonoBehaviour
     {
-        i = 0;
-    }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        i++;
-        Debug.Log("Ouch");
-        if (i % 10 == 0)
+        private void OnTriggerEnter(Collider other)
         {
-            Debug.Log("Screw you");
+            WriteToLog();
+        }
+
+        private void WriteToLog()
+        {
+            Debug.Log("Ouch");
         }
     }
 }

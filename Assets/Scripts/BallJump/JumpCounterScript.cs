@@ -3,27 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class JumpCounterScript : MonoBehaviour
+
+namespace Tools
 {
-
-    public GameObject ground;
-    public int CountOfBallJumps;
-    private float distanceToTheGround;
-    public TextMeshProUGUI HUDJumpsAndDistanceToTheFloor;
-    void Start()
+    public class JumpCounterScript : MonoBehaviour
     {
-        CountOfBallJumps = 0;
-    }
+
+        public GameObject ground;
+        public TextMeshProUGUI HUDJumpsAndDistanceToTheFloor;
+
+        [SerializeField] private float distanceToTheGround;
+        [SerializeField] private int CountOfBallJumps;
 
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        CountOfBallJumps++;
-    }
+        void Start()
+        {
+            CountOfBallJumps = 0;
+        }
 
 
-    void Update()
-    {
-        HUDJumpsAndDistanceToTheFloor.text = "Distance to the ground: \n" + Mathf.Abs(transform.position.y - ground.transform.position.y) + "\n jumps: " + CountOfBallJumps;
+        private void OnCollisionEnter(Collision collision)
+        {
+            CountOfBallJumps++;
+        }
+
+
+        void Update()
+        {
+            ShowInfo();
+        }
+
+
+        private void ShowInfo()
+        {
+            HUDJumpsAndDistanceToTheFloor.text = "Distance to the ground: \n" + Mathf.Abs(transform.position.y - ground.transform.position.y)
+                + "\n jumps: " + CountOfBallJumps;
+        }
+
     }
 }

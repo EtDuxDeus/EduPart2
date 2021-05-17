@@ -2,88 +2,103 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EventExample : MonoBehaviour
+namespace Tools
 {
-    public delegate void ExampleDelEventHandler();
-    private static event ExampleDelEventHandler ExampleOfEvent;
-
-    public static event ExampleDelEventHandler MyExampleOfEvent
+    public class EventExample : MonoBehaviour
     {
-        add
+        public delegate void MathMethodHandler();
+        private static event MathMethodHandler MathCaller;
+
+        void Update()
         {
-            ExampleOfEvent += value;
-            Debug.Log("Some Logic On Ading");
+            ControlTheEventSystem();
         }
-        remove
+
+        private void ControlTheEventSystem()
         {
-            ExampleOfEvent -= value;
-            Debug.Log("Some Logic On Removing");
-        }
-    }
-
-    private void OnEnable()
-    {
-        MyExampleOfEvent += MathForExample.CalculateTheMath;
-        MyExampleOfEvent += MathForExample.WriteToLogTheAnswer;
-    }
-
-    private void OnDisable()
-    {
-        MyExampleOfEvent -= MathForExample.CalculateTheMath;
-        MyExampleOfEvent -= MathForExample.WriteToLogTheAnswer;
-    }
-
-    public static void ClearAllDelegatesFromEventHandler()
-    {
-        foreach (System.Delegate d in ExampleOfEvent.GetInvocationList())
-        {
-            ExampleOfEvent -= (ExampleDelEventHandler)d;
-        }
-    }
-
-    private void SubToCalculateTheMath()
-    {
-        ExampleOfEvent += MathForExample.CalculateTheMath;
-    }
-
-    private void RemCalculateTheMath()
-    {
-        ExampleOfEvent -= MathForExample.CalculateTheMath;
-    }
-
-    private void SubToWriteToLogTheAnwer()
-    {
-        ExampleOfEvent += MathForExample.WriteToLogTheAnswer;
-    }
-
-    private void RemToWriteToLogTheAnwer()
-    {
-        ExampleOfEvent -= MathForExample.WriteToLogTheAnswer;
-    }
-
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (ExampleOfEvent != null)
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                ExampleOfEvent.Invoke();
+                InvokeTheEvent();
+            }
+            if (Input.GetKeyDown(KeyCode.M))
+            {
+                SubToCalculateTheMath();
+                SubToWriteToLogTheAnwer();
+            }
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                ClearAllDelegatesFromEventHandler();
+            }
+        }
+        private void InvokeTheEvent()
+        {
+            if (MathCaller != null)
+            {
+                MathCaller.Invoke();
             }
             else
             {
                 Debug.Log("No subscribers");
             }
         }
-        if (Input.GetKeyDown(KeyCode.M))
+
+
+
+        private void OnEnable()
         {
             SubToCalculateTheMath();
             SubToWriteToLogTheAnwer();
         }
-        if (Input.GetKeyDown(KeyCode.R))
+
+        private void OnDisable()
         {
             RemCalculateTheMath();
             RemToWriteToLogTheAnwer();
         }
+
+        public static event MathMethodHandler MyMathCaller
+        {
+            add
+            {
+                MathCaller += value;
+                Debug.Log("Some Logic On Ading");
+            }
+            remove
+            {
+                MathCaller -= value;
+                Debug.Log("Some Logic On Removing");
+            }
+        }
+
+        public static void ClearAllDelegatesFromEventHandler()
+        {
+            foreach (System.Delegate d in MathCaller.GetInvocationList())
+            {
+                MathCaller -= (MathMethodHandler)d;
+            }
+        }
+
+        private void SubToCalculateTheMath()
+        {
+            MathCaller += MathForExample.CalculateTheMath;
+        }
+
+        private void RemCalculateTheMath()
+        {
+            MathCaller -= MathForExample.CalculateTheMath;
+        }
+
+        private void SubToWriteToLogTheAnwer()
+        {
+            MathCaller += MathForExample.WriteToLogTheAnswer;
+        }
+
+        private void RemToWriteToLogTheAnwer()
+        {
+            MathCaller -= MathForExample.WriteToLogTheAnswer;
+        }
+
+
+
     }
 }

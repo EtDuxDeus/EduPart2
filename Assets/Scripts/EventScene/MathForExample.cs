@@ -2,29 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MathForExample : MonoBehaviour
+namespace Tools
 {
-    public static double SumForExample;
-    void Start()
+    public class MathForExample : MonoBehaviour
     {
-        SumForExample = 1;
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.O))
+        [SerializeField] private static double SumForExample;
+        void Start()
         {
-            EventExample.ClearAllDelegatesFromEventHandler();
+            SumForExample = 1;
         }
-    }
 
-    public static void CalculateTheMath()
-    {
-        SumForExample = SumForExample + 1;
-    }
+        void Update()
+        {
+            EraseAllDelegateFromEvent();
+        }
 
-    public static void WriteToLogTheAnswer()
-    {
-        Debug.Log(SumForExample);
+        private void EraseAllDelegateFromEvent()
+        {
+            if (Input.GetKeyDown(KeyCode.O))
+            {
+                EventExample.ClearAllDelegatesFromEventHandler();
+            }
+        }
+
+        public static void CalculateTheMath()
+        {
+            SumForExample = SumForExample + 1;
+        }
+
+        public static void WriteToLogTheAnswer()
+        {
+            Debug.Log(SumForExample);
+        }
     }
 }

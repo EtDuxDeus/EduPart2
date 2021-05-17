@@ -2,20 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NormalizedMovingScript : MonoBehaviour
+namespace Tools
 {
-    private float speed = 100f;
-
-    void Update()
+    public class NormalizedMovingScript : MonoBehaviour
     {
-        MoveByNormalizedVector();
-    }
+        private float speed = 100f;
 
-    private void MoveByNormalizedVector()
-    {
-        float deltaTimeSpeed = speed * Time.deltaTime;
+        void Update()
+        {
+            MoveByNormalizedVector();
+        }
 
-        transform.position += transform.forward * deltaTimeSpeed;
-        transform.rotation *= Quaternion.AngleAxis(1 * deltaTimeSpeed, new Vector3(0, 1, 0));
+        private void MoveByNormalizedVector()
+        {
+            float deltaTimeSpeed = speed * Time.deltaTime;
+
+            transform.position += transform.forward * deltaTimeSpeed;
+            transform.rotation *= Quaternion.AngleAxis(1 * deltaTimeSpeed, new Vector3(0, 1, 0));
+        }
+
     }
 }
