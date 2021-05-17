@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/Json&WebRequestScene.unity
+    guid: 1dee61add29c9c640be3f93dbe3056c0
+  - enabled: 1
+    path: Assets/Scenes/Swords.unity
+    guid: f310bc732543645459c98c8a8cfb2ae8
   m_configObjects: {}
