@@ -8,16 +8,19 @@ namespace Tools
 {
     public class WebRequest : MonoBehaviour
     {
-        [SerializeField] private string url;
+        [SerializeField] private string _url;
+
 
         private void Start()
         {
             StartCoroutine(SendRequest());
             StartCoroutine(SendPost());
         }
+
+
         private IEnumerator SendRequest()
         {
-            UnityWebRequest request = UnityWebRequest.Get(url);
+            UnityWebRequest request = UnityWebRequest.Get(_url);
             yield return request.SendWebRequest();
 
             Debug.Log(request.downloadHandler.text);
@@ -33,7 +36,7 @@ namespace Tools
 
             string json = JsonUtility.ToJson(post);
 
-            UnityWebRequest request = UnityWebRequest.Post(url, dataform);
+            UnityWebRequest request = UnityWebRequest.Post(_url, dataform);
 
             byte[] postByte = Encoding.UTF8.GetBytes(json);
 
@@ -49,6 +52,7 @@ namespace Tools
 
             Debug.Log(postFromServer);
         }
+
 
         private void FillTheFieldsOfEntity(MyClassForJSon post)
         {

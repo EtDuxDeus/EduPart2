@@ -6,18 +6,18 @@ namespace Tools
 {
     public class Rotation_Euler : MonoBehaviour
     {
+        private float _speed = 360f;
 
-        private float speed = 360f;
 
-
-        void Update()
+        private void Update()
         {
             RotateByEuler();
         }
 
+
         private void RotateByEuler()
         {
-            transform.eulerAngles += new Vector3(1, 1, 1) * Time.deltaTime * speed;
+            transform.eulerAngles += new Vector3(1, 1, 1) * Time.deltaTime * _speed;
         }
     }
 }

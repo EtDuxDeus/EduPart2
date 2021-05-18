@@ -12,6 +12,7 @@ namespace Tools
         public string myName;
         public int myMoney;
 
+
         public override string ToString()
         {
             return myName + " " + myRank + " " + myMoney;

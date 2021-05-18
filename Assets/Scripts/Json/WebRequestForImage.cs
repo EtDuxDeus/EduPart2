@@ -9,12 +9,13 @@ namespace Tools
     public class WebRequestForImage : MonoBehaviour
     {
         [SerializeField] private string url;
-        Image mat;
+        private Image _imageOnGUI;
+
 
         void Start()
         {
             StartCoroutine(SendRequestForImage());
-            mat = GetComponent<Image>();
+            _imageOnGUI = GetComponent<Image>();
 
         }
 
@@ -22,11 +23,12 @@ namespace Tools
         private IEnumerator SendRequestForImage()
         {
             UnityWebRequest request = UnityWebRequestTexture.GetTexture(url);
-            yield return request.SendWebRequest();
-            var image = DownloadHandlerTexture.GetContent(request);
-            Debug.Log(image);
-            mat.sprite = Sprite.Create(image, new Rect(0.0f, 0.0f, image.width, image.height), new Vector2(0.5f, 0.5f), 100.0f);
 
+            yield return request.SendWebRequest();
+
+            var image = DownloadHandlerTexture.GetContent(request);
+
+            _imageOnGUI.sprite = Sprite.Create(image, new Rect(0.0f, 0.0f, image.width, image.height), new Vector2(0.5f, 0.5f), 100.0f);
         }
     }
 }

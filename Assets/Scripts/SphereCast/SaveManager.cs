@@ -8,32 +8,43 @@ namespace Tools
 {
     public class SaveManager : MonoBehaviour
     {
-        private string path;
+        private string _path;
+
+
         private void Awake()
         {
-            path = Application.persistentDataPath + "\\save.txt";
+            _path = Application.persistentDataPath + "\\save.txt";
         }
-        void Start()
+
+
+        private void Start()
         {
             LoadFromFile();
         }
 
-        void Update()
+        private void Update()
         {
             SaveToFile();
         }
 
         private void LoadFromFile()
         {
-            if (File.Exists(path))
+            if (File.Exists(_path))
             {
-                ControllerScript.hitNumber = Convert.ToInt32(File.ReadAllText(path));
+                ControllerScript.hitNumber = Convert.ToInt32(File.ReadAllText(_path));
             }
             else
             {
-                File.Create(path);
+                CreateFile();
             }
         }
+
+
+        private void CreateFile()
+        {
+            File.Create(_path);
+        }
+
 
         private void SaveToFile()
         {
@@ -45,15 +56,14 @@ namespace Tools
 
         public void HitSave()
         {
-            if (File.Exists(path))
+            if (File.Exists(_path))
             {
-                File.WriteAllText(path, Convert.ToString(ControllerScript.hitNumber));
+                File.WriteAllText(_path, Convert.ToString(ControllerScript.hitNumber));
             }
             else
             {
-                File.Create(path);
-
-                File.WriteAllText(path, Convert.ToString(ControllerScript.hitNumber));
+                CreateFile();
+                HitSave();
             }
         }
 

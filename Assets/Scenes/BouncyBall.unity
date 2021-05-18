@@ -224,8 +224,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ground: {fileID: 895755391}
-  CountOfBallJumps: 0
   HUDJumpsAndDistanceToTheFloor: {fileID: 674369674}
+  _distanceToTheGround: 0
+  _CountOfBallJumps: 0
 --- !u!1 &674369672
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,16 +6,18 @@ namespace Tools
 {
     public class PassingScript : MonoBehaviour
     {
-        [SerializeField] private int passingsThrough;
+        [SerializeField] private int _passingsThrough;
 
-        void Start()
+
+        private void Start()
         {
-            passingsThrough = 0;
+            _passingsThrough = 0;
         }
+
 
         private void OnTriggerEnter(Collider other)
         {
-            passingsThrough++;
+            _passingsThrough++;
         }
 
     }

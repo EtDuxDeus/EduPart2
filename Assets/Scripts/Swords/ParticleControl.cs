@@ -6,17 +6,20 @@ namespace Tools
 {
     public class ParticleControl : MonoBehaviour
     {
-        private ParticleSystem swordParticles;
+        private ParticleSystem _swordParticles;
+
 
         private void Awake()
         {
-            swordParticles = GetComponent<ParticleSystem>();
+            _swordParticles = GetComponent<ParticleSystem>();
         }
 
-        void Update()
+
+        private void Update()
         {
             ControlParticleSystem();
         }
+
 
         private void ControlParticleSystem()
         {
@@ -24,18 +27,18 @@ namespace Tools
             {
                 SwitchParticleState();
             }
-
         }
+
 
         private void SwitchParticleState()
         {
-            if (swordParticles.isPlaying)
+            if (_swordParticles.isPlaying)
             {
-                swordParticles.Stop();
+                _swordParticles.Stop();
             }
             else
             {
-                swordParticles.Play();
+                _swordParticles.Play();
             }
         }
     }

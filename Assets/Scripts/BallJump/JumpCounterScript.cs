@@ -8,27 +8,26 @@ namespace Tools
 {
     public class JumpCounterScript : MonoBehaviour
     {
-
         public GameObject ground;
         public TextMeshProUGUI HUDJumpsAndDistanceToTheFloor;
 
-        [SerializeField] private float distanceToTheGround;
-        [SerializeField] private int CountOfBallJumps;
+        [SerializeField] private float _distanceToTheGround;
+        [SerializeField] private int _CountOfBallJumps;
 
 
-        void Start()
+        private void Start()
         {
-            CountOfBallJumps = 0;
+            _CountOfBallJumps = 0;
         }
 
 
         private void OnCollisionEnter(Collision collision)
         {
-            CountOfBallJumps++;
+            _CountOfBallJumps++;
         }
 
 
-        void Update()
+        private void Update()
         {
             ShowInfo();
         }
@@ -37,7 +36,7 @@ namespace Tools
         private void ShowInfo()
         {
             HUDJumpsAndDistanceToTheFloor.text = "Distance to the ground: \n" + Mathf.Abs(transform.position.y - ground.transform.position.y)
-                + "\n jumps: " + CountOfBallJumps;
+                + "\n jumps: " + _CountOfBallJumps;
         }
 
     }

@@ -8,74 +8,78 @@ namespace Tools
 {
     public class Serialization : MonoBehaviour
     {
-        private MyClassForJSon myEntity;
-        private string path;
+        private MyClassForJSon _myEntity;
+        private string _path;
 
-        void Start()
+
+        private void Start()
         {
-            myEntity = new MyClassForJSon();
-            path = Application.streamingAssetsPath + "\\myEntity";
-            myEntity.myRank = 0;
-            myEntity.myMoney = 0;
-            myEntity.myName = "NoOne";
+            _myEntity = new MyClassForJSon();
+            _path = Application.streamingAssetsPath + "\\myEntity";
+            _myEntity.myRank = 0;
+            _myEntity.myMoney = 0;
+            _myEntity.myName = "NoOne";
         }
 
 
-        void Update()
+        private void Update()
         {
             FillTheFieldsOfClass();
             ShowEntityInfo();
             SaveEntityToJson();
             LoadEntityFromJson();
-
         }
+
 
         private void FillTheFieldsOfClass()
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                myEntity.myRank = 6;
-                myEntity.myMoney = 666;
-                myEntity.myName = "Me";
+                _myEntity.myRank = 6;
+                _myEntity.myMoney = 666;
+                _myEntity.myName = "Me";
             }
         }
+
 
         private void ShowEntityInfo()
         {
             if (Input.GetKeyDown(KeyCode.T))
             {
-                Debug.Log(myEntity);
+                Debug.Log(_myEntity);
             }
         }
+
 
         private void SaveEntityToJson()
         {
             if (Input.GetKeyDown(KeyCode.S))
             {
-                string json = JsonUtility.ToJson(myEntity);
+                string json = JsonUtility.ToJson(_myEntity);
 
-                if (File.Exists(path))
+                if (File.Exists(_path))
                 {
-                    File.WriteAllText(path, json);
+                    File.WriteAllText(_path, json);
                     Debug.Log("Saved");
                 }
                 else
                 {
-                    File.Create(path);
+                    File.Create(_path);
                     Debug.Log("JsonFile Created");
                 }
 
             }
         }
 
+
         private void LoadEntityFromJson()
         {
             if (Input.GetKeyDown(KeyCode.L))
             {
-                if (File.Exists(path))
+                if (File.Exists(_path))
                 {
-                    string json = File.ReadAllText(path);
-                    JsonUtility.FromJsonOverwrite(json, myEntity);
+                    string json = File.ReadAllText(_path);
+                    JsonUtility.FromJsonOverwrite(json, _myEntity);
                     Debug.Log("Object is loaded");
                 }
                 else

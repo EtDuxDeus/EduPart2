@@ -6,16 +6,18 @@ namespace Tools
 {
     public class NormalizedMovingScript : MonoBehaviour
     {
-        private float speed = 100f;
+        private float _speed = 100f;
 
-        void Update()
+
+        private void Update()
         {
             MoveByNormalizedVector();
         }
 
+
         private void MoveByNormalizedVector()
         {
-            float deltaTimeSpeed = speed * Time.deltaTime;
+            float deltaTimeSpeed = _speed * Time.deltaTime;
 
             transform.position += transform.forward * deltaTimeSpeed;
             transform.rotation *= Quaternion.AngleAxis(1 * deltaTimeSpeed, new Vector3(0, 1, 0));

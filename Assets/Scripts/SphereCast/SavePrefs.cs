@@ -6,46 +6,53 @@ namespace Tools
 {
     public class SavePrefs : MonoBehaviour
     {
-        public static int numberForSave;
+        public static int NumberForSave;
 
 
-        void Start()
+        private void Start()
         {
-            numberForSave = 0;
+            NumberForSave = 0;
         }
 
-        void Update()
+
+        private void Update()
         {
             IncreaseNumber();
             SaveToPlayerPrefs();
         }
 
+
         private void IncreaseNumber()
         {
             if (Input.GetKeyDown(KeyCode.I))
             {
-                numberForSave++;
+                NumberForSave++;
                 ShowNumberToLog();
             }
         }
+
+
         private void ShowNumberToLog()
         {
-            Debug.Log("Number for save: " + numberForSave);
+            Debug.Log("Number for save: " + NumberForSave);
         }
+
 
         private void SaveToPlayerPrefs()
         {
             if (Input.GetKeyDown(KeyCode.F5))
             {
-                PlayerPrefs.SetInt("Numerator", numberForSave);
+                PlayerPrefs.SetInt("Numerator", NumberForSave);
 
                 PlayerPrefs.Save();
                 ShowSavingInfo();
             }
         }
+
+
         private void ShowSavingInfo()
         {
-            Debug.Log("Number is saved (" + numberForSave + ")");
+            Debug.Log("Number is saved (" + NumberForSave + ")");
         }
     }
 }

@@ -4,18 +4,22 @@ using UnityEngine;
 
 namespace Tools
 {
-    public class MathForExample : MonoBehaviour
+    public class SubscriberForEvent : MonoBehaviour
     {
-        [SerializeField] private static double SumForExample;
-        void Start()
+        private static int _iteratorOfMethodCalls;
+
+
+        private void Start()
         {
-            SumForExample = 1;
+            _iteratorOfMethodCalls = 0;
         }
 
-        void Update()
+
+        private void Update()
         {
             EraseAllDelegateFromEvent();
         }
+
 
         private void EraseAllDelegateFromEvent()
         {
@@ -25,14 +29,16 @@ namespace Tools
             }
         }
 
-        public static void CalculateTheMath()
+
+        public static void IncreaseIteratorOfMethodCall()
         {
-            SumForExample = SumForExample + 1;
+            _iteratorOfMethodCalls++;
         }
 
-        public static void WriteToLogTheAnswer()
+
+        public static void WriteIteratorToLog()
         {
-            Debug.Log(SumForExample);
+            Debug.Log(_iteratorOfMethodCalls);
         }
     }
 }

@@ -6,29 +6,40 @@ namespace Tools
 {
     public class LoadPrefs : MonoBehaviour
     {
-        public int importantNumber;
+        private int _NumberToShowLoadingFromPrefs;
 
 
-        void Update()
+        private void Update()
+        {
+            SaveDataToPlayerPrefs();
+            EraseDataFromPlayerPrefs();
+        }
+
+
+        private void SaveDataToPlayerPrefs()
         {
             if (Input.GetKeyDown(KeyCode.F9))
             {
                 if (PlayerPrefs.HasKey("Numerator"))
                 {
-                    importantNumber = PlayerPrefs.GetInt("Numerator");
-                    SavePrefs.numberForSave = importantNumber;
+                    _NumberToShowLoadingFromPrefs = PlayerPrefs.GetInt("Numerator");
+                    SavePrefs.NumberForSave = _NumberToShowLoadingFromPrefs;
                 }
                 else
                 {
-                    importantNumber = 0;
+                    _NumberToShowLoadingFromPrefs = 0;
                 }
-                Debug.Log("Number is loaded: " + importantNumber);
+                Debug.Log("Number is loaded: " + _NumberToShowLoadingFromPrefs);
             }
+        }
 
+
+        private void EraseDataFromPlayerPrefs()
+        {
             if (Input.GetKeyDown(KeyCode.F10))
             {
                 PlayerPrefs.DeleteAll();
-                SavePrefs.numberForSave = 0;
+                SavePrefs.NumberForSave = 0;
                 Debug.Log("All data is erased");
             }
         }

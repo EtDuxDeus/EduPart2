@@ -6,10 +6,11 @@ namespace Tools
 {
     public class ResourceLoadExample : MonoBehaviour
     {
-        void Update()
+        private void Update()
         {
             SpawnSphereFromResources();
         }
+
 
         private void SpawnSphereFromResources()
         {

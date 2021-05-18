@@ -6,13 +6,16 @@ namespace Tools
 {
     public class EventExample : MonoBehaviour
     {
-        public delegate void MathMethodHandler();
-        private static event MathMethodHandler MathCaller;
+        public delegate void SubscriberMethodHandler();
 
-        void Update()
+        private static event SubscriberMethodHandler SubscriberCaller;
+
+
+        private void Update()
         {
             ControlTheEventSystem();
         }
+
 
         private void ControlTheEventSystem()
         {
@@ -22,19 +25,21 @@ namespace Tools
             }
             if (Input.GetKeyDown(KeyCode.M))
             {
-                SubToCalculateTheMath();
-                SubToWriteToLogTheAnwer();
+                SubscribeToIncreaseIteratorOfMethodCall();
+                SubscribeToWriteToLogTheAnwer();
             }
             if (Input.GetKeyDown(KeyCode.R))
             {
                 ClearAllDelegatesFromEventHandler();
             }
         }
+
+
         private void InvokeTheEvent()
         {
-            if (MathCaller != null)
+            if (SubscriberCaller != null)
             {
-                MathCaller.Invoke();
+                SubscriberCaller.Invoke();
             }
             else
             {
@@ -43,62 +48,65 @@ namespace Tools
         }
 
 
-
         private void OnEnable()
         {
-            SubToCalculateTheMath();
-            SubToWriteToLogTheAnwer();
+            SubscribeToIncreaseIteratorOfMethodCall();
+            SubscribeToWriteToLogTheAnwer();
         }
+
 
         private void OnDisable()
         {
-            RemCalculateTheMath();
-            RemToWriteToLogTheAnwer();
+            RemoveIncreaseIteratorOfMethodCall();
+            RemoveToWriteToLogTheAnwer();
         }
 
-        public static event MathMethodHandler MyMathCaller
+
+        public static event SubscriberMethodHandler MySubscriberCaller
         {
             add
             {
-                MathCaller += value;
+                SubscriberCaller += value;
                 Debug.Log("Some Logic On Ading");
             }
             remove
             {
-                MathCaller -= value;
+                SubscriberCaller -= value;
                 Debug.Log("Some Logic On Removing");
             }
         }
 
+
         public static void ClearAllDelegatesFromEventHandler()
         {
-            foreach (System.Delegate d in MathCaller.GetInvocationList())
+            foreach (System.Delegate d in SubscriberCaller.GetInvocationList())
             {
-                MathCaller -= (MathMethodHandler)d;
+                SubscriberCaller -= (SubscriberMethodHandler)d;
             }
         }
 
-        private void SubToCalculateTheMath()
-        {
-            MathCaller += MathForExample.CalculateTheMath;
-        }
 
-        private void RemCalculateTheMath()
+        private void SubscribeToIncreaseIteratorOfMethodCall()
         {
-            MathCaller -= MathForExample.CalculateTheMath;
-        }
-
-        private void SubToWriteToLogTheAnwer()
-        {
-            MathCaller += MathForExample.WriteToLogTheAnswer;
-        }
-
-        private void RemToWriteToLogTheAnwer()
-        {
-            MathCaller -= MathForExample.WriteToLogTheAnswer;
+            SubscriberCaller += SubscriberForEvent.IncreaseIteratorOfMethodCall;
         }
 
 
+        private void RemoveIncreaseIteratorOfMethodCall()
+        {
+            SubscriberCaller -= SubscriberForEvent.IncreaseIteratorOfMethodCall;
+        }
 
+
+        private void SubscribeToWriteToLogTheAnwer()
+        {
+            SubscriberCaller += SubscriberForEvent.WriteIteratorToLog;
+        }
+
+
+        private void RemoveToWriteToLogTheAnwer()
+        {
+            SubscriberCaller -= SubscriberForEvent.WriteIteratorToLog;
+        }
     }
 }

@@ -6,28 +6,29 @@ namespace Tools
 {
     public class TorqueScript : MonoBehaviour
     {
-        private Rigidbody RigBod;
-        private float TurnPower = 50f;
+        private Rigidbody _rigidbody;
+        private float _turnPower = 50f;
 
-        void Start()
+
+        private void Start()
         {
-            RigBod = GetComponent<Rigidbody>();
+            _rigidbody = GetComponent<Rigidbody>();
         }
 
 
-        void Update()
+        private void Update()
         {
             RotateByTorque();
         }
 
+
         private void RotateByTorque()
         {
-            float h = Input.GetAxis("Horizontal") * TurnPower * Time.deltaTime;
-            float v = Input.GetAxis("Vertical") * TurnPower * Time.deltaTime;
+            float h = Input.GetAxis("Horizontal") * _turnPower * Time.deltaTime;
+            float v = Input.GetAxis("Vertical") * _turnPower * Time.deltaTime;
 
-            RigBod.AddTorque(transform.up * h);
-            RigBod.AddTorque(transform.right * v);
+            _rigidbody.AddTorque(transform.up * h);
+            _rigidbody.AddTorque(transform.right * v);
         }
-
     }
 }

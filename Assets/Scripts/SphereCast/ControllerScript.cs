@@ -13,35 +13,36 @@ namespace Tools
         public static int hitNumber = 0;
         public float TurnPower = 50f;
 
-        private Rigidbody rigBod;
+
+        private Rigidbody _rigidbody;
         private RaycastHit hit;
 
-        void Start()
+
+        private void Start()
         {
-            rigBod = GetComponent<Rigidbody>();
+            _rigidbody = GetComponent<Rigidbody>();
         }
 
 
-
-        void Update()
+        private void Update()
         {
             Move();
             if (Input.GetButtonDown("Jump"))
             {
                 Shoot();
             }
-
-
         }
+
 
         private void Move()
         {
             float h = Input.GetAxis("Horizontal") * TurnPower * Time.deltaTime;
             float v = Input.GetAxis("Vertical") * TurnPower * Time.deltaTime;
 
-            rigBod.AddTorque(transform.up * h);
-            rigBod.AddTorque(transform.right * v);
+            _rigidbody.AddTorque(transform.up * h);
+            _rigidbody.AddTorque(transform.right * v);
         }
+
 
         private void Shoot()
         {
@@ -58,9 +59,6 @@ namespace Tools
             {
                 Debug.Log("Missed");
             }
-
         }
-
-
     }
 }

@@ -6,19 +6,18 @@ namespace Tools
 {
     public class Rotation_Quaternion : MonoBehaviour
     {
+        private float _speed = -360f;
 
-        private float speed = -360f;
 
-        void Update()
+        private void Update()
         {
             RotateByQuaternion();
         }
 
+
         private void RotateByQuaternion()
         {
-
-            transform.rotation *= Quaternion.AngleAxis(1 * speed * Time.deltaTime, new Vector3(1, 1, 1));
-
+            transform.rotation *= Quaternion.AngleAxis(1 * _speed * Time.deltaTime, new Vector3(1, 1, 1));
         }
     }
 }
