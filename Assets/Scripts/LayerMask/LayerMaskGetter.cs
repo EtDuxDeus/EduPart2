@@ -48,7 +48,7 @@ namespace Tools
             }
             else
             {
-                Debug.Log("Missed, layerNumber is: " + LayerMask.LayerToName(_rayMask));
+                Debug.Log("Missed, layerNumber is: " + _rayMask.value);
 
                 _rayMask = _rayMask << 1;
             }

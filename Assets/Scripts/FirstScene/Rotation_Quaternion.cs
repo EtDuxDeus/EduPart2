@@ -11,6 +11,7 @@ namespace Tools
         [SerializeField] private double _RPM = 0;
         private bool positiveSign = false;
 
+
         private void Update()
         {
             RotateByQuaternion();
@@ -26,12 +27,12 @@ namespace Tools
 
         private void RPMShowInfo()
         {
-            if (transform.rotation.y > 0 & positiveSign)
+            if (transform.localRotation.y > 0 & positiveSign)
             {
                 _numberOfRotations += 1;
                 positiveSign = !positiveSign;
             }
-            if (transform.rotation.y < 0 & !positiveSign)
+            if (transform.localRotation.y < 0 & !positiveSign)
             {
                 _numberOfRotations += 1;
                 positiveSign = !positiveSign;
